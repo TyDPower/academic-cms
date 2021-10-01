@@ -5,7 +5,7 @@ const dbConfig = require('../utils/databaseConfig')
 const Student = require('../models/studentModel')
 
 router.get('/findAllStudents', async (req, res) => {
-    try {
+    /*try {
         await mdb.connect(dbConfig.dbs.testDatabase)
         const result = await Student.model.find();
         res.json(result);
@@ -16,7 +16,19 @@ router.get('/findAllStudents', async (req, res) => {
         })
     } finally {
         await mdb.disconnect();
+    }*/
+
+    await mdb.connect(dbConfig.dbs.testDatabase)
+    const result = await Student.model.find();
+    
+    if (result) {
+        res.json(result);
+        await mdb.disconnect();
+    } else {
+        console.error("no results returned...")
     }
+    
+
 })
 
 router.get('/createStudent', async (req, res) => {
