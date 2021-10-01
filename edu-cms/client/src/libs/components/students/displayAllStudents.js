@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function DisplayAllStudents() {
+function DisplayAllStudents(props) {
   const [students, setStudents] = useState(null);
 
   useEffect(() => {
@@ -30,6 +29,13 @@ function DisplayAllStudents() {
             <h2>{student.age}</h2>
             <h3>{student.enrollment.dateEnrolled}</h3>
             <br />
+            <button
+              onClick={() => {
+                props.viewStudent(student._id)
+              }}
+              type="button" className="btn btn-outline-primary">
+              View Student
+            </button>
           </div>
         );
       })}
