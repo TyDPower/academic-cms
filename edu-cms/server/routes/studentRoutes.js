@@ -18,7 +18,7 @@ router.get('/findAllStudents', async (req, res) => {
         await mdb.disconnect();
     }*/
 
-    await mdb.connect(dbConfig.dbs.testDatabase)
+    await mdb.connect(dbConfig.dbs.testDatabase);
     const result = await Student.model.find();
     
     if (result) {
@@ -28,6 +28,22 @@ router.get('/findAllStudents', async (req, res) => {
         console.error("no results returned...")
     }
     
+
+})
+
+router.get('/findStudent/:id', async (req, res) => {
+
+    const studentID = req.params.id;
+
+    await mdb.connect(dbConfig.dbs.testDatabase);
+    const result = await Student.model.find({ _id: studentID });
+    
+    if (result) {
+        res.json(result);
+        await mdb.disconnect();
+    } else {
+        console.error("no results returned...")
+    }
 
 })
 
