@@ -7,9 +7,8 @@ function DisplayAllStudents(props) {
     async function findAllStudents() {
         try {
             const result = await fetch(`http://localhost:5000/students/findAllStudents`)
-            const students = await result.json();
-            console.log(students);
-            setStudents(students);
+            const resultData = await result.json();
+            setStudents(resultData);
         } catch (err) {
             console.error(err);
         }
@@ -31,10 +30,10 @@ function DisplayAllStudents(props) {
             <br />
             <button
               onClick={() => {
-                props.viewStudent(student._id)
+                props.viewStudent(["displayStudent", student._id])
               }}
               type="button" className="btn btn-outline-primary">
-              View Student
+              View {student.lastName}
             </button>
           </div>
         );
