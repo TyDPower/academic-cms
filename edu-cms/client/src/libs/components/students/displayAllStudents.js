@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { StudentUtils } from "../../utils/students";
+
+const studentUtils = new StudentUtils();
 
 function DisplayAllStudents(props) {
   const [students, setStudents] = useState(null);
 
   useEffect(() => {
-    async function findAllStudents() {
-        try {
-            const result = await fetch(`http://localhost:5000/students/findAllStudents`)
-            const resultData = await result.json();
-            setStudents(resultData);
-        } catch (err) {
-            console.error(err);
-        }
-      
-    };
-    findAllStudents();   
+    studentUtils.findAllStudents()
+    .then(studentList => setStudents(studentList))
+    .catch(err => console.error(err));
   }, [])
 
   return (

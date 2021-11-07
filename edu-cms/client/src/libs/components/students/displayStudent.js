@@ -7,10 +7,11 @@ function DisplayStudent(props) {
   const [studentID, setStudentID] = useState(props.student);
   const [student, setStudent] = useState();
 
-    useEffect(() => {
-        studentUtils.findStudent(studentID)
-        .then(studentData => setStudent(studentData))
-    }, [])
+  useEffect(() => {
+      studentUtils.findStudent(studentID)
+      .then(studentData => setStudent(studentData))
+      .catch(err => console.error(err));
+  }, [])
 
   return (
       <>
